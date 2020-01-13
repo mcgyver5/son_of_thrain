@@ -1,0 +1,164 @@
+Security DEEPLINKS.  COMMANDS.  One Liners.  
+Guidelines:  No dead links.   No Obvious
+
+Illuminating Podcast Episodes
+
+
+Online Tools
+	https://hackertarget.com/nmap-online-port-scanner/
+	
+RE / Debugger / 
+
+Purposely Insecure Apps
+
+Challenges
+
+Burp
+	Burp Efficiency Tips:  https://io4mcgyver5.wordpress.com/2018/03/24/burp-efficiency-tips/
+Nmap
+Wireshark / Tshark
+
+
+41:37
+Ultimate Albums: The Story of Back In Black - An AC/DC Documentary
+Mr X
+Recommended for you
+
+
+1:17:28
+Sharkfest 2013 - Inside the TCP Handshake (Betty DuBois)
+Chris Greer
+29K views
+
+
+41:23
+Wireshark Sharkfest 2014 Packet Challenge
+Laura Chappell
+12K views
+
+
+14:22
+Wireshark Tutorial for Beginners
+Anson Alexander
+479K views
+
+Analyze A Bot Infected Host With Wireshark
+TheSecurityTube
+42K views
+
+Rhye - Taste
+Rhye
+Recommended for you
+
+Network Sniffing: Using Wireshark to Find Network Vulnerabilities
+David Hoelzer
+260K views
+
+Talking Heads - Psycho Killer
+louis bertrand
+Recommended for you
+
+How to read Wireshark Output
+Dan Morrill
+323K views
+
+TCP/IP and Subnet Masking
+Eli the Computer Guy
+2.5M views
+
+Advanced Network Forensics
+Bill Buchanan OBE
+9K views
+
+The Beatles - Sgt. Pepper's Lonely Hearts Club Band (50th Anniversary Edition)
+Sky Live
+Recommended for you
+
+Sharkfest 2013 - Understanding Encryption Services Using Wireshark (Larry Greenblatt)
+Chris Greer
+6.5K views
+
+The Ultimate Wireshark Tutorial
+EverleaGroup
+66K views
+
+Password Sniffing with Wireshark (Laura Chappell)
+Christiaan008
+131K views
+
+Sharkfest 2013 - Wireshark Network Forensics (Laura Chappell)
+https://www.youtube.com/watch?v=UXAHvwouk6Q
+SysInternals
+Metasploit
+
+Conferences:
+Sharkfest:  https://sharkfestus.wireshark.org/
+
+Conference Presentations:  
+
+Blog Posts.
+
+Print Tutorials
+
+Video Tutorials
+
+Bug Bounty + places to report and get recognition
+
+Speakers
+
+Events
+
+Testing Help Needed
+
+12) Recon
+https://ipinfodb.com/api  
+Recon-NG video:  https://www.youtube.com/watch?v=0cm6q9EXXQ8  (8:50)
+https://dnsdumpster.com/
+
+Password Dumps 
+
+File name and directory lists
+
+Secure Coding
+
+Indicators of Compromise
+
+XSS Payloads
+
+File Upload Payloads
+
+Social Engineering
+https://www.amazon.com/Phone-Book-Breakthrough-Neurolinguistic-Enlightenment/dp/1555520111
+
+
+SDR and RFID NFC 
+
+Hardware Hacking
+
+Financial Crimes
+
+Law Enforcement and Court Cases
+
+Cryptography and Cryptology
+
+Insecure Browser Games.
+
+Insecure Wireless Router information
+
+Onions.
+
+Security Specifications
+
+Interesting Bug Reports and discussions.
+
+Physical Security
+
+CTF
+
+Malware Analysis
+
+Packet Analysis
+https://github.com/appneta/tcpreplay/blob/master/README.md
+
+
+Certificate Ecosystem 
