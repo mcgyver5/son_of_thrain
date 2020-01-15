@@ -21,6 +21,10 @@ class color:
 
 
 def print_results(desc,results):
+    # instead of right left middle use remote, local, shared
+    other = remote
+    if desc == "remote":
+        other = "local"
     section_separator = "\r\n-----------------------------------------------------------------------------------\r\n"
     result_string = color.BOLD + "The {} list has the following {} URLs that the {} list does not have:" + color.END
     if desc == "right":
