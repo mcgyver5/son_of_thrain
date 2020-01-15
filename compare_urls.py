@@ -1,13 +1,5 @@
-"""
-1. open file
-2. pull all urls into map or list via regex
-3. use git API to look at remote file  from github / gitlab
-4. make list of urls from that file
-5. result is format like 'Your file is missing the following URLs that the remote repo has and your file has the following urls that the 
-remote repo is missing.'
 
-"""
-import os.path
+import os
 from os import path
 import sys
 import getopt
@@ -56,7 +48,6 @@ for line in fh:
 
 remote_list = []
 remote_url = sys.argv[2]
-#remote_url = "https://raw.githubusercontent.com/sanjacinto/excellent_training_videos/master/README.md"
 r = requests.get(remote_url, allow_redirects=True)
 for s in r:
     url = find_url(s)
