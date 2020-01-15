@@ -7,9 +7,22 @@ import re
 import requests
 from collections import Counter
 
+class color:
+   PURPLE = '\033[95m'
+   CYAN = '\033[96m'
+   DARKCYAN = '\033[36m'
+   BLUE = '\033[94m'
+   GREEN = '\033[92m'
+   YELLOW = '\033[93m'
+   RED = '\033[91m'
+   BOLD = '\033[1m'
+   UNDERLINE = '\033[4m'
+   END = '\033[0m'
+
+
 def print_results(desc,results):
     section_separator = "\r\n-----------------------------------------------------------------------------------\r\n"
-    result_string = "The {} list has the following {} URLs that the {} list does not have:"
+    result_string = color.BOLD + "The {} list has the following {} URLs that the {} list does not have:" + color.END
     if desc == "right":
         result_string = result_string.format("remote",len(results),"local")
     if desc == "left":
@@ -49,7 +62,8 @@ for line in fh:
 remote_list = []
 remote_url = sys.argv[2]
 r = requests.get(remote_url, allow_redirects=True)
-print("Comparing local file {} with remote file {} ".format(local_file,remote_url))
+print(color.UNDERLINE + "Comparing local file {} with remote file {} ".format(local_file,remote_url))
+print(color.END)
 for s in r:
     url = find_url(s)
     if url:
