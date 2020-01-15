@@ -32,7 +32,7 @@ local_file = ""
 if len(sys.argv) > 2:
     local_file = sys.argv[1]
     if path.exists(local_file):
-        print(local_file + " exists ")
+        print("\r\n")
     else:
         print(local_file + " does not exist")
         sys.exit()
@@ -49,6 +49,7 @@ for line in fh:
 remote_list = []
 remote_url = sys.argv[2]
 r = requests.get(remote_url, allow_redirects=True)
+print("Comparing local file {} with remote file {} ".format(local_file,remote_url))
 for s in r:
     url = find_url(s)
     if url:
