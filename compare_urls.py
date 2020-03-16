@@ -18,6 +18,9 @@ class color:
    UNDERLINE = '\033[4m'
    END = '\033[0m'
 
+### HINT, to use a remote github file as a comparision to a local:
+### right click on remote file and copy URL
+### also can compare two github files with one another.
 
 def print_results(desc,results):
     # instead of right left middle use remote, local, shared
