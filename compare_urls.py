@@ -2,7 +2,6 @@
 import os
 from os import path
 import sys
-import getopt
 import re
 import requests
 from collections import Counter
@@ -22,17 +21,17 @@ class color:
 
 def print_results(desc,results):
     # instead of right left middle use remote, local, shared
-    other = remote
+    section_separator = "\r\n-----------------------------------------------------------------------------------\r\n"
+    other = "remote"
+    
     if desc == "remote":
         other = "local"
-    section_separator = "\r\n-----------------------------------------------------------------------------------\r\n"
-    result_string = color.BOLD + "The {} list has the following {} URLs that the {} list does not have:" + color.END
-    if desc == "right":
-        result_string = result_string.format("remote",len(results),"local")
-    if desc == "left":
-        result_string = result_string.format("local",len(results),"remote")
+    
     if desc == "middle":
         result_string = "The lists have the following {} URLs in common: ".format(len(results))
+    else:
+        result_string = color.BOLD + "The {} list has the following {} URLs that the {} list does not have:" + color.END
+        result_string = result_string.format(desc,len(results),other)
     none_result = "The {} list is empty".format(desc)
     if len(results) > 0:
         print(result_string)
@@ -66,6 +65,11 @@ for line in fh:
 remote_list = []
 remote_url = sys.argv[2]
 r = requests.get(remote_url, allow_redirects=True)
+try:
+    print(r.raise_for_status())
+except requests.exceptions.HTTPError as err:
+    print err
+    sys.exit(1)
 print(color.UNDERLINE + "Comparing local file {} with remote file {} ".format(local_file,remote_url))
 print(color.END)
 for s in r:
@@ -80,7 +84,7 @@ local_set = set(url_list)
 
 middle_result = local_set & remote_set 
 
-print_results("right",right_result)
-print_results("left",left_result)
+print_results("remote",right_result)
+print_results("local",left_result)
 print_results("middle",middle_result)
 
