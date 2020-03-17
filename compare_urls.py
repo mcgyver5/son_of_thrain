@@ -1,4 +1,4 @@
-
+from bs4 import BeautifulSoup
 import os
 from os import path
 import sys
@@ -47,6 +47,7 @@ def print_results(desc,results):
 def find_url(string):
     url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', string) 
     return url
+
 local_file = ""
 if len(sys.argv) > 2:
     local_file = sys.argv[1]
@@ -58,6 +59,7 @@ if len(sys.argv) > 2:
 else:
     print("usage: python compare_urls.py local_file remote_file")
     sys.exit()
+
 url_list = []
 fh = open(local_file)
 for line in fh:
@@ -70,15 +72,19 @@ remote_url = sys.argv[2]
 r = requests.get(remote_url, allow_redirects=True)
 try:
     print(r.raise_for_status())
+    response_text = r.text
 except requests.exceptions.HTTPError as err:
-    print err
+    print(err)
     sys.exit(1)
 print(color.UNDERLINE + "Comparing local file {} with remote file {} ".format(local_file,remote_url))
 print(color.END)
-for s in r:
-    url = find_url(s)
-    if url:
-        remote_list.append(url[0])
+soup = BeautifulSoup(response_text,'lxml')
+results = soup.find("article")
+anchors = results.find_all("a")
+for anchor in anchors:
+    url =  anchor['href']
+    if url.startswith("http"):
+        remote_list.append(url)
 
 left_result = list((Counter(url_list) - Counter(remote_list)).elements())
 right_result = list((Counter(remote_list) - Counter(url_list)).elements())
