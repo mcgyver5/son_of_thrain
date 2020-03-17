@@ -48,6 +48,35 @@ def find_url(string):
     url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', string) 
     return url
 
+def build_remote_list(remote_url):
+    remote_list = []
+    response = requests.get(remote_url, allow_redirects=True)
+
+    try:
+        print(response.raise_for_status())
+        response_text = response.text
+    except requests.exceptions.HTTPError as err:
+        print(err)
+        sys.exit(1)
+
+    soup = BeautifulSoup(response_text,'lxml')
+    results = soup.find("article")
+    anchors = results.find_all("a")
+    for anchor in anchors:
+        url =  anchor['href']
+        if url.startswith("http"):
+            remote_list.append(url)
+    return remote_list
+
+def build_local_list(file_handle):
+
+    local_list = []
+    for line in fh:
+        url = find_url(line)
+        if url:
+            local_list.append(url[0])
+    return local_list
+
 local_file = ""
 if len(sys.argv) > 2:
     local_file = sys.argv[1]
@@ -60,36 +89,18 @@ else:
     print("usage: python compare_urls.py local_file remote_file")
     sys.exit()
 
-url_list = []
-fh = open(local_file)
-for line in fh:
-    url = find_url(line)
-    if url:
-        url_list.append(url[0])
 
-remote_list = []
+fh = open(local_file)
+local_list = build_local_list(fh)
 remote_url = sys.argv[2]
-r = requests.get(remote_url, allow_redirects=True)
-try:
-    print(r.raise_for_status())
-    response_text = r.text
-except requests.exceptions.HTTPError as err:
-    print(err)
-    sys.exit(1)
+remote_list = build_remote_list(remote_url)
+
 print(color.UNDERLINE + "Comparing local file {} with remote file {} ".format(local_file,remote_url))
 print(color.END)
-soup = BeautifulSoup(response_text,'lxml')
-results = soup.find("article")
-anchors = results.find_all("a")
-for anchor in anchors:
-    url =  anchor['href']
-    if url.startswith("http"):
-        remote_list.append(url)
-
-left_result = list((Counter(url_list) - Counter(remote_list)).elements())
-right_result = list((Counter(remote_list) - Counter(url_list)).elements())
+left_result = list((Counter(local_list) - Counter(remote_list)).elements())
+right_result = list((Counter(remote_list) - Counter(local_list)).elements())
 remote_set = set(remote_list)
-local_set = set(url_list)
+local_set = set(local_list)
 
 middle_result = local_set & remote_set 
 
