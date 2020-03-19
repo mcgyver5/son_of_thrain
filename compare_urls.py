@@ -57,6 +57,8 @@ def get_pastebin_list(pastebin_url):
 
     return filtered_list
 
+def get_github_list(github_url):
+
 
 def build_remote_list(remote_url):
     # pastebin url is like:  https://pastebin.com/MfdUqsyE
@@ -76,10 +78,14 @@ def build_remote_list(remote_url):
     soup = BeautifulSoup(response_text,'lxml')
     results = soup.find("article")
     anchors = results.find_all("a")
+# opp for list comprehnsion:
+    remote_list = [x for x in anchors if anchor['href'].startswith('http')]
+'''
     for anchor in anchors:
         url =  anchor['href']
         if url.startswith("http"):
             remote_list.append(url)
+'''
     return remote_list
 
 def build_local_list(file_handle):
@@ -115,10 +121,10 @@ left_result = list((Counter(local_list) - Counter(remote_list)).elements())
 right_result = list((Counter(remote_list) - Counter(local_list)).elements())
 remote_set = set(remote_list)
 local_set = set(local_list)
+from os import path
+import sys
+import re
+import requests
+from collections import Counter
 
-middle_result = local_set & remote_set 
-
-print_results("remote",right_result)
-print_results("local",left_result)
-print_results("middle",middle_result)
-
+class color:
