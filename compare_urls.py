@@ -86,7 +86,7 @@ def build_remote_list(remote_url):
         if url.startswith("http"):
             remote_list.append(url)
     '''
-    return remote_list
+    return list(set(remote_list))
 
 def build_local_list(file_handle):
 
@@ -95,7 +95,7 @@ def build_local_list(file_handle):
         url = find_url(line)
         if url:
             local_list.append(url[0])
-    return local_list
+    return list(set(local_list))
 
 local_file = ""
 if len(sys.argv) > 2:
