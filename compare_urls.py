@@ -79,7 +79,7 @@ def build_remote_list(remote_url):
     results = soup.find("article")
     anchors = results.find_all("a")
 # opp for list comprehnsion:
-    remote_list = [x for x in anchors if anchor['href'].startswith('http')]
+    remote_list = [anchor for anchor in anchors if anchor['href'].startswith('http')]
     '''
     for anchor in anchors:
         url =  anchor['href']
