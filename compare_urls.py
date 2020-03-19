@@ -47,8 +47,22 @@ def print_results(desc,results):
 def find_url(string):
     url = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', string) 
     return url
+def get_pastebin_list(pastebin_url):
+    remote_text = requests.get(pastebin_url,'').text
+    soup = BeautifulSoup(remote_text,'lxml')
+    results = soup.find("textarea")
+    result_list = str(results.text).splitlines()
+
+    filtered_list = [line for line in result_list if line.startswith('http')]
+
+    return filtered_list
+
 
 def build_remote_list(remote_url):
+    # pastebin url is like:  https://pastebin.com/MfdUqsyE
+    if remote_url.startswith('https://pastebin'):
+        result_list = get_pastebin_list(remote_url)
+        return result_list
     remote_list = []
     response = requests.get(remote_url, allow_redirects=True)
 
@@ -58,7 +72,7 @@ def build_remote_list(remote_url):
     except requests.exceptions.HTTPError as err:
         print(err)
         sys.exit(1)
-
+    #following is for github:
     soup = BeautifulSoup(response_text,'lxml')
     results = soup.find("article")
     anchors = results.find_all("a")
