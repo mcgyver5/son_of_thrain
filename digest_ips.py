@@ -7,6 +7,11 @@ for linex in f:
         ip_list.append(regex_ip_pattern.search(linex)[0])
     except:
         print("nonetype")
+newfile = open("iplist.txt", "w")
+linebreak = "\r"
 for entry in ip_list:
     print(entry)
+    newfile.write(entry + linebreak)
+
+newfile.close()
 
